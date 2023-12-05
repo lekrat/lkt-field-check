@@ -6,7 +6,6 @@ export default {name: "LktFieldCheck", inheritAttrs: false}
 // Emits
 import {generateRandomString} from "lkt-string-tools";
 import {computed, nextTick, ref, useSlots, watch} from "vue";
-import {createLktEvent} from "lkt-events";
 
 const emits = defineEmits(['update:modelValue', 'focus', 'blur', 'click', 'click-info', 'click-error']);
 
@@ -47,6 +46,7 @@ const inputElement = ref(null);
 // Reactive data
 const originalValue = ref(props.modelValue),
     value = ref(props.modelValue),
+    inputLikeValue = ref(value.value ? 'true' : 'false'),
     focusing = ref(false),
     editable = ref(!props.readMode);
 
@@ -82,12 +82,10 @@ const focus = () => {
 
 // Watch data
 watch(() => props.modelValue, (v) => value.value = v)
-watch(value, (v) => emits('update:modelValue', v))
+watch(value, (v) => (inputLikeValue.value = value.value ? 'true' : 'false') && emits('update:modelValue', v))
 
 const reset = () => value.value = originalValue.value,
-    getValue = () => value.value,
-    onFocus = ($event: any) => (focusing.value = true) && emits('focus', $event, createLktEvent(Identifier, {value: value.value})),
-    onBlur = ($event: any) => (focusing.value = false) && emits('blur', $event, createLktEvent(Identifier, {value: value.value}));
+    getValue = () => value.value;
 
 defineExpose({
     Identifier,
@@ -111,7 +109,8 @@ defineExpose({
                v-bind:disabled="disabled"
                v-bind:readonly="readonly"
                v-bind:placeholder="placeholder"
-               v-bind:value="value ? 'true' : 'false'">
+               v-bind:value="inputLikeValue"
+               v-bind:checked="value">
         <slot v-if="!!slots.label" name="label"></slot>
         <label v-if="!!!slots.label" :for="Identifier" v-html="label"></label>
     </div>

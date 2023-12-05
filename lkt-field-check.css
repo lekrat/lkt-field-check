@@ -37,6 +37,8 @@
     line-height: var(--field-label-line-height);
     margin: var(--field-label-margin);
     padding-left: 20px;
+    min-height: 1rem;
+    min-width: 1rem;
 }
 
 .lkt-field-check label:before {
