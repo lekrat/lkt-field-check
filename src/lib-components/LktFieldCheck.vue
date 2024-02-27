@@ -74,6 +74,7 @@ const isValid = computed(() => {
 const focus = () => {
     nextTick(() => {
         if (inputElement.value) {
+            //@ts-ignore
             inputElement.value.focus();
         }
     });

@@ -1,4 +1,4 @@
-import { defineComponent as E, useSlots as F, ref as o, computed as f, watch as c, openBlock as y, createElementBlock as h, normalizeClass as N, unref as d, renderSlot as k, withDirectives as T, createElementVNode as $, vModelCheckbox as H, createCommentVNode as g, nextTick as R } from "vue";
+import { defineComponent as E, useSlots as N, ref as o, computed as f, watch as c, openBlock as y, createElementBlock as h, normalizeClass as T, unref as d, renderSlot as k, withDirectives as $, createElementVNode as F, vModelCheckbox as H, createCommentVNode as g, nextTick as R } from "vue";
 import { generateRandomString as b } from "lkt-string-tools";
 const j = ["data-labeled"], z = ["name", "id", "disabled", "readonly", "placeholder", "value", "checked"], A = ["for", "innerHTML"], D = { name: "LktFieldCheck", inheritAttrs: !1 }, I = /* @__PURE__ */ E({
   ...D,
@@ -25,9 +25,9 @@ const j = ["data-labeled"], z = ["name", "id", "disabled", "readonly", "placehol
   },
   emits: ["update:modelValue", "focus", "blur", "click", "click-info", "click-error"],
   setup(t, { expose: V, emit: M }) {
-    const S = M, n = F(), l = t, u = b(16), i = o(null), p = o(l.modelValue), a = o(l.modelValue), m = o(a.value ? "true" : "false"), B = o(!1), s = o(!l.readMode), C = f(() => typeof l.valid == "function" ? l.valid() : l.valid), x = f(() => a.value !== p.value), w = f(() => {
+    const S = M, n = N(), l = t, u = b(16), i = o(null), p = o(l.modelValue), a = o(l.modelValue), m = o(a.value ? "true" : "false"), B = o(!1), s = o(!l.readMode), x = f(() => typeof l.valid == "function" ? l.valid() : l.valid), C = f(() => a.value !== p.value), w = f(() => {
       const e = ["lkt-field", "lkt-field-check"];
-      return l.palette && e.push(`lkt-field--${l.palette}`), x.value && e.push("is-changed"), l.disabled && e.push("is-disabled"), B.value && e.push("has-focus"), e.push(C.value ? "is-valid" : "is-error"), e.push(l.modelValue ? "is-filled" : "is-empty"), e.join(" ");
+      return l.palette && e.push(`lkt-field--${l.palette}`), C.value && e.push("is-changed"), l.disabled && e.push("is-disabled"), B.value && e.push("has-focus"), e.push(x.value ? "is-valid" : "is-error"), e.push(l.modelValue ? "is-filled" : "is-empty"), e.join(" ");
     }), L = () => {
       R(() => {
         i.value && i.value.focus();
@@ -40,11 +40,11 @@ const j = ["data-labeled"], z = ["name", "id", "disabled", "readonly", "placehol
       value: () => a.value,
       isMandatory: () => l.mandatory
     }), (e, v) => (y(), h("div", {
-      class: N(w.value),
+      class: T(w.value),
       "data-labeled": !d(n).label
     }, [
       k(e.$slots, "prefix"),
-      T($("input", {
+      $(F("input", {
         "onUpdate:modelValue": v[0] || (v[0] = (r) => a.value = r),
         type: "checkbox",
         ref: (r) => i.value = r,
@@ -66,8 +66,7 @@ const j = ["data-labeled"], z = ["name", "id", "disabled", "readonly", "placehol
       }, null, 8, A))
     ], 10, j));
   }
-});
-const K = {
+}), K = {
   install: (t) => {
     t.component("lkt-field-check") === void 0 && t.component("lkt-field-check", I);
   }
